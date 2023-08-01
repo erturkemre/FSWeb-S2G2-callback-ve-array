@@ -135,10 +135,27 @@ console.log(OrtalamaGolSayisi(Finaller(fifaData)));
 	
 	İpucu: "takım kısaltmaları" (team initials) için datada araştırma yapın!
 İpucu: `.reduce` Kullanın*/
-
-function UlkelerinKazanmaSayilari(/* kodlar buraya */) {
-  /* kodlar buraya */
+function KazananKisaltmalar(fifaData, callback) {
+  let kazananlar = callback(fifaData).map((kazanan) => {
+    return kazanan["Home Team Goals"] > kazanan["Away Team Goals"]
+      ? kazanan["Home Team Initials"]
+      : kazanan["Away Team Initials"];
+  });
+  return kazananlar;
 }
+
+function UlkelerinKazanmaSayilari(data) {
+  let sonuc = {};
+  for (let item in data) {
+    if (sonuc[data[item]] == undefined) {
+      sonuc[data[item]] = 1;
+    } else {
+      sonuc[data[item]] += 1;
+    }
+  }
+  return sonuc;
+}
+console.log(UlkelerinKazanmaSayilari(KazananKisaltmalar(fifaData, Finaller)));
 
 /*  BONUS 2:  
 EnCokGolAtan() isminde bir fonksiyon yazın, `data` yı parametre olarak alsın ve Dünya kupası finallerinde en çok gol atan takımı döndürsün */
