@@ -101,7 +101,7 @@ function YillaraGoreKazananlar(
   });
   return yillarKazananlar;
 }
-console.log(YillaraGoreKazananlar(fifaData, Finaller, Yillar, Kazananlar));
+//console.log(YillaraGoreKazananlar(fifaData, Finaller, Yillar, Kazananlar));
 
 /*  Görev 6: 
 	Bir higher order fonksiyonu olan `OrtalamaGolSayisi` isimli fonksiyona aşağıdakileri uygulayın: 
@@ -117,9 +117,16 @@ console.log(YillaraGoreKazananlar(fifaData, Finaller, Yillar, Kazananlar));
 	
 */
 
-function OrtalamaGolSayisi(/* kodlar buraya */) {
-  /* kodlar buraya */
+function OrtalamaGolSayisi(Finaller) {
+  const avgGoller = Finaller.reduce((total, gol) => {
+    return (
+      total +
+      (gol["Home Team Goals"] + gol["Away Team Goals"]) / Finaller.length
+    );
+  }, 0);
+  return avgGoller.toFixed(2);
 }
+console.log(OrtalamaGolSayisi(Finaller(fifaData)));
 
 /// EKSTRA ÇALIŞMALAR ///
 
